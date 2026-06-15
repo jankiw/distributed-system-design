@@ -1,0 +1,3 @@
+azure-servicebus
+azure-communication-email
+python-dotenv

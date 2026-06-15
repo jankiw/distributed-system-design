@@ -2,3 +2,5 @@
 *.hcl
 *.tfstate
 *.backup
+__pycache*
+.env
