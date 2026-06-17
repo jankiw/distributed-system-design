@@ -12,7 +12,7 @@ resource "random_id" "random_chars_web_app_name" {
 }
 
 resource "azurerm_linux_web_app" "web-app" {
-  name                = "streamlit"
+  name                = "my-dsd-streamlit"
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
   service_plan_id     = azurerm_service_plan.service_plan.id
