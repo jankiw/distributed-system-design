@@ -27,6 +27,13 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Azure login
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZURE_ENTRA_ID_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_ENTRA_ID_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
       - name: Get owner/repo name and convert to lowercase
         id: get-image-name
         run: echo "image-name=$(echo ${{ github.repository }} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_OUTPUT
@@ -48,13 +55,6 @@ jobs:
           tags: |
             ${{ env.REGISTRY }}/${{ steps.get-image-name.outputs.image-name }}:latest
 
-      - name: Azure login
-        uses: azure/login@v2
-        with:
-          client-id: ${{ secrets.AZURE_ENTRA_ID_CLIENT_ID }}
-          tenant-id: ${{ secrets.AZURE_ENTRA_ID_TENANT_ID }}
-          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-
       - name: Restart App Service (force pull new image)
         run: |
-          az webapp restart --name \${{ secrets.WEBAPP }} --resource-group \${{ secrets.RG }}
+          az webapp restart --name \my-dsd-streamlit --resource-group \example-rg
