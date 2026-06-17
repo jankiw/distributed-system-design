@@ -3,4 +3,5 @@
 *.tfstate
 *.backup
 __pycache*
+*workspace.xml
 .env
