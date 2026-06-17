@@ -20,7 +20,7 @@ variable "postgresql_address_prefixes" {
 
 variable "streamlit_docker_image_name" {
   type        = string
-  default     = "waynegoosen/azure-streamlit-poc:0.1.1"
+  default     = "jankiw/distributed-system-design:0.1.2"
 }
 
 variable "docker_registry_url" {
@@ -61,7 +61,7 @@ variable "app_service_plan_sku_name" {
 
 variable "streamlit_name" {
   type        = string
-  default     = "azure-streamlit-poc"
+  default     = "azure-streamlit"
 }
 
 variable "environment" {

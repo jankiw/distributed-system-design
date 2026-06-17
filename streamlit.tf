@@ -1,7 +1,7 @@
 resource "azurerm_service_plan" "service_plan" {
   name                = local.app_service_plan_name
-  location            = data.azurerm_resource_group.rg.location
-  resource_group_name = data.azurerm_resource_group.rg.name
+  location            = azurerm_resource_group.example.location
+  resource_group_name = azurerm_resource_group.example.name
   os_type             = "Linux"
   sku_name            = var.app_service_plan_sku_name
   tags = {}
@@ -13,8 +13,8 @@ resource "random_id" "random_chars_web_app_name" {
 
 resource "azurerm_linux_web_app" "web-app" {
   name                = "${local.linux_web_app_name}-${random_id.random_chars_web_app_name.hex}"
-  location            = data.azurerm_resource_group.rg.location
-  resource_group_name = data.azurerm_resource_group.rg.name
+  location            = azurerm_resource_group.example.location
+  resource_group_name = azurerm_resource_group.example.name
   service_plan_id     = azurerm_service_plan.service_plan.id
   app_settings        = merge(local.app_settings, var.app_settings)
 

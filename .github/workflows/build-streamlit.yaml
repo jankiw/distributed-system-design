@@ -63,3 +63,15 @@ jobs:
           tags: |
             ${{ env.REGISTRY }}/${{ steps.get-image-name.outputs.image-name }}:latest
             ${{ env.REGISTRY }}/${{ steps.get-image-name.outputs.image-name }}:${{ steps.gitversion.outputs.semVer }}
+      - name: Make package public
+        if: success()
+        env:
+          OWNER: ${{ github.repository_owner }}
+          PACKAGE: ${{ steps.get-image-name.outputs.image-name }}
+          TOKEN: ${{ secrets.PAT }}
+        run: |
+          curl -sS -X PATCH \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer $TOKEN" \
+            "https://api.github.com/orgs/${OWNER}/packages/container/${PACKAGE}/visibility" \
+            -d '{"visibility":"public"}'

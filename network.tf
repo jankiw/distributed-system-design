@@ -1,3 +1,4 @@
+/*
 resource "azurerm_virtual_network" "example" {
     name = "example-network"
     address_space = var.vnet_address_space
@@ -28,17 +29,6 @@ resource "azurerm_subnet" "postgresql" {
   }
 }
 
-/*
-resource "azurerm_public_ip" "vm" {
-    count = 3
-    name = "vm-pip-${count.index}"
-    location = azurerm_resource_group.example.location
-    resource_group_name = azurerm_resource_group.example.name
-    allocation_method = "Static"
-    sku = "Standard"
-}
-*/
-
 resource "azurerm_network_interface" "example" {
     count = 3
     name = "example-nic-${count.index}"
@@ -51,3 +41,14 @@ resource "azurerm_network_interface" "example" {
         #public_ip_address_id = azurerm_public_ip.vm[count.index].id
     }
 }
+*/
+/*
+resource "azurerm_public_ip" "vm" {
+    count = 3
+    name = "vm-pip-${count.index}"
+    location = azurerm_resource_group.example.location
+    resource_group_name = azurerm_resource_group.example.name
+    allocation_method = "Static"
+    sku = "Standard"
+}
+*/
