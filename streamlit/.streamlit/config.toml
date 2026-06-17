@@ -1,0 +1,17 @@
+[client]
+showErrorDetails = false
+toolbarMode = "auto"
+showSidebarNavigation = true
+
+[theme]
+base = "dark"
+
+[logger]
+level = "debug"
+messageFormat = "%(asctime)s %(message)s"
+
+[server]
+port = 80
+
+[browser]
+gatherUsageStats = false
