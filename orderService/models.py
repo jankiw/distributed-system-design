@@ -17,6 +17,16 @@ class Orders(db.Model):
             raise ValueError("failed simple email validation")
         return value
     
+    def to_dict(self):
+        return{
+            "id":self.id,
+            "email":self.email,
+            "product_name":self.product_name,
+            "product_id":self.product_id,
+            "status":self.status,
+            "creation_time":self.creation_time
+        }
+    
 
 
 class Products(db.Model):

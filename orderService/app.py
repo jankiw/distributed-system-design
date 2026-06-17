@@ -78,6 +78,43 @@ def get_orders(id):
         return jsonify({"error":"Order not found"}), 404
     return jsonify(order.to_dict())
 
+@app.route('/products/<int:id>', methods=["GET"])
+def get_product(id):
+    product = db.session.get(
+        Products,
+        id
+    )
+    if not product:
+        return jsonify({"error": "Product not found"}), 404
+    return jsonify(
+        product.to_dict()
+    )
+
+@app.route('/products', methods=["POST"])
+def create_product():
+    try:
+        data = request.get_json()
+        if not data:
+            return jsonify({"error": "json body required"}), 400 
+        name = data.get("name")
+        amount = data.get("amount")
+        price = data.get("price")
+        if not name or amount is None or price is None:
+            return jsonify({"error": "name, amount and price required"}), 400
+        product = Products(
+            name=name,
+            amount=amount,
+            price=price
+        )
+        db.session.add(product)
+        db.session.commit()
+        return jsonify({"Success":"Product with id "+str(product.id)+" created"}), 201
+    
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({"error":str(e)}), 500
+    
+    
 if __name__ == '__main__':
     app.run(
         host="0.0.0.0",
