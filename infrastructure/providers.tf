@@ -14,7 +14,7 @@ terraform {
     resource_group_name  = "storage-rg"
     storage_account_name = "streamlittfstatedsd"
     container_name       = "terraform"
-    #key                  = "strealitpoctfstate.tfstate"
+    key                  = "strealitpoctfstate.tfstate"
   }
 
   required_version = ">= 1.8.0"
