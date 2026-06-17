@@ -4,7 +4,7 @@ on:
   push:
     branches: ['main']
     paths:
-      - 'app/**'
+      - 'streamlit/**'
   workflow_dispatch:
 
 concurrency:

@@ -3,5 +3,5 @@
 *.tfstate
 *.backup
 __pycache*
-*workspace.xml
+streamlit/.idea/workspace.xml
 .env
