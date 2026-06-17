@@ -11,10 +11,10 @@ terraform {
   }
 
   backend "azurerm" {
-    resource_group_name  = "example-rg"
-    storage_account_name = "streamlittfstate"
-    container_name       = "tfstate"
-    key                  = "strealitpoctfstate.tfstate"
+    resource_group_name  = "storage-rg"
+    storage_account_name = "streamlittfstatedsd"
+    container_name       = "terraform"
+    #key                  = "strealitpoctfstate.tfstate"
   }
 
   required_version = ">= 1.8.0"
