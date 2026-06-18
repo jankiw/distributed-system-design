@@ -56,26 +56,26 @@ resource "azurerm_container_app" "example" {
       image  = "ghcr.io/jankiw/distributed-system-design:notification"
       cpu    = 0.25
       memory = "0.5Gi"
-    }
 
-    env {
-      name = "SERVICE_BUS_CONNECTION_STRING"
-      value = var.bus_string
-    }
+      env {
+        name = "SERVICE_BUS_CONNECTION_STRING"
+        value = var.bus_string
+      }
 
-    env {
-      name = "ACS_CONNECTION_STRING"
-      value = var.acs_string
-    }
+      env {
+        name = "ACS_CONNECTION_STRING"
+        value = var.acs_string
+      }
 
-    env {
-      name = "ACS_SENDER_ADDRESS"
-      value = var.acs_addr
-    }
+      env {
+        name = "ACS_SENDER_ADDRESS"
+        value = var.acs_addr
+      }
 
-    env {
-      name = "DATABASE_URI"
-      value = var.db_uri
+      env {
+        name = "DATABASE_URI"
+        value = var.db_uri
+      }
     }
   }
 }
