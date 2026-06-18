@@ -53,7 +53,7 @@ jobs:
           TF_VAR_acs_string: ${{ secrets.ACS_CONNECTION_STRING  }}
           TF_VAR_acs_addr: ${{ secrets.ACS_SENDER_ADDRESS }}
           TF_VAR_db_uri: ${{ secrets.DATABASE_URI }}
-        run: terraform init 
+        run: terraform init -var="bus_string=${{ secrets.SERVICE_BUS_CONNECTION_STRING }}" -var="acs_string=${{ secrets.ACS_CONNECTION_STRING }}" -var="acs_addr=${{ secrets.ACS_SENDER_ADDRESS }}" -var="db_uri=${{ secrets.DATABASE_URI }}"
 
       - name: Terraform Validate
         id: validate
@@ -72,7 +72,7 @@ jobs:
           TF_VAR_acs_addr: ${{ secrets.ACS_SENDER_ADDRESS }}
           TF_VAR_db_uri: ${{ secrets.DATABASE_URI }}
         working-directory: ${{ env.WORKING_DIRECTORY }}
-        run: terraform plan -no-color
+        run: terraform plan -no-color -var="bus_string=${{ secrets.SERVICE_BUS_CONNECTION_STRING }}" -var="acs_string=${{ secrets.ACS_CONNECTION_STRING }}" -var="acs_addr=${{ secrets.ACS_SENDER_ADDRESS }}" -var="db_uri=${{ secrets.DATABASE_URI }}"
         continue-on-error: false
 
       - name: Terraform Apply (auto-approve)
@@ -86,4 +86,4 @@ jobs:
           TF_VAR_acs_string: ${{ secrets.ACS_CONNECTION_STRING  }}
           TF_VAR_acs_addr: ${{ secrets.ACS_SENDER_ADDRESS }}
           TF_VAR_db_uri: ${{ secrets.DATABASE_URI }}
-        run: terraform apply -auto-approve
+        run: terraform apply -auto-approve -var="bus_string=${{ secrets.SERVICE_BUS_CONNECTION_STRING }}" -var="acs_string=${{ secrets.ACS_CONNECTION_STRING }}" -var="acs_addr=${{ secrets.ACS_SENDER_ADDRESS }}" -var="db_uri=${{ secrets.DATABASE_URI }}"
