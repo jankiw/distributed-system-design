@@ -1,0 +1,19 @@
+FROM python:3.9-slim
+
+WORKDIR /app
+
+COPY requirements.txt .
+
+RUN pip3 install -r requirements.txt
+
+COPY . /app
+
+RUN groupadd -g 1005 appgroup && \
+    useradd -u 1005 -g appgroup appuser && \
+    chown -R appuser:appgroup /app
+
+EXPOSE 80
+
+USER appuser
+
+CMD ["python", "./notificationService.py"]

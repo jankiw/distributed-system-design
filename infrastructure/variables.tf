@@ -20,7 +20,12 @@ variable "postgresql_address_prefixes" {
 
 variable "streamlit_docker_image_name" {
   type        = string
-  default     = "jankiw/distributed-system-design:latest"
+  default     = "jankiw/distributed-system-design:streamlit"
+}
+
+variable "notification_docker_image_name" {
+  type        = string
+  default     = "jankiw/distributed-system-design:notification"
 }
 
 variable "docker_registry_url" {

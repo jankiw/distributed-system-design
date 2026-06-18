@@ -1,17 +1,17 @@
-name: Build streamlit
+name: Build notifications
 
 on:
   push:
     branches: ['main']
     paths:
-      - 'streamlit/**'
+      - 'notificationService/**'
   workflow_dispatch:
 
 concurrency:
-  group: build-streamlit
+  group: build-notifications
 
 jobs:
-  build-streamlit:
+  build-notification:
     runs-on: ubuntu-latest
 
     environment: production
@@ -52,11 +52,11 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v5.3.0
         with:
-          context: ./streamlit
+          context: ./notificationService
           push: true
           tags: |
-            ${{ env.REGISTRY }}/${{ steps.get-image-name.outputs.image-name }}:streamlit
+            ${{ env.REGISTRY }}/${{ steps.get-image-name.outputs.image-name }}:notification
 
       - name: Restart App Service (force pull new image)
         run: |
-          az webapp restart --name \my-dsd-streamlit --resource-group \example-rg
+          az webapp restart --name \my-dsd-notifications --resource-group \example-rg
