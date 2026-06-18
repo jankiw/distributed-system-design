@@ -16,4 +16,4 @@ EXPOSE 80
 
 USER appuser
 
-CMD ["python", "./notificationService.py"]
+CMD ["python", "notificationService.py"]
