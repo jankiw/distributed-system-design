@@ -77,4 +77,3 @@ variable "environment" {
 variable "bus_string" {}
 variable "acs_string" {}
 variable "acs_addr" {}
-variable "db_uri" {}

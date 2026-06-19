@@ -1,3 +1,4 @@
+
 resource "azurerm_private_dns_zone" "postgresql" {
   name = "privatelink.postgres.database.azure.com"
   resource_group_name = azurerm_resource_group.example.name
@@ -29,6 +30,20 @@ resource "azurerm_postgresql_flexible_server_database" "exampledb" {
     server_id = azurerm_postgresql_flexible_server.postgresql.id
     charset = "utf8"
     collation = "en_US.utf8"
+}
+
+resource "azurerm_private_endpoint" "example" {
+  name                = "example-dsd-endpoint"
+  location            = azurerm_resource_group.example.location
+  resource_group_name = azurerm_resource_group.example.name
+  subnet_id           = azurerm_subnet.example.id
+
+  private_service_connection {
+    name                           = "example-privateserviceconnection"
+    private_connection_resource_id = azurerm_postgresql_flexible_server.postgresql.id
+    is_manual_connection           = false
+    subresource_names              = ["postgresqlServer"]
+  }
 }
 
 /*

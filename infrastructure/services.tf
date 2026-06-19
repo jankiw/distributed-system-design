@@ -42,6 +42,8 @@ resource "azurerm_container_app_environment" "example" {
   location                   = azurerm_resource_group.example.location
   resource_group_name        = azurerm_resource_group.example.name
   log_analytics_workspace_id = azurerm_log_analytics_workspace.example.id
+  virtual_network_id = azurerm_virtual_network.example.id
+  subnet_id = azurerm_subnet.example.id
 }
 
 resource "azurerm_container_app" "notifications" {
@@ -74,7 +76,7 @@ resource "azurerm_container_app" "notifications" {
 
       env {
         name = "DATABASE_URI"
-        value = var.db_uri
+        value = locals.database_uri
       }
     }
   }
@@ -110,7 +112,7 @@ resource "azurerm_container_app" "payments" {
 
       env {
         name = "DATABASE_URI"
-        value = var.db_uri
+        value = locals.database_uri
       }
     }
   }
@@ -146,13 +148,13 @@ resource "azurerm_container_app" "consumer" {
 
       env {
         name = "DATABASE_URI"
-        value = var.db_uri
+        value = locals.database_uri
       }
     }
   }
 }
 
-resource "azurerm_container_app" "corder" {
+resource "azurerm_container_app" "order" {
   name                         = "my-dsd-order"
   container_app_environment_id = azurerm_container_app_environment.example.id
   resource_group_name          = azurerm_resource_group.example.name
@@ -182,7 +184,7 @@ resource "azurerm_container_app" "corder" {
 
       env {
         name = "DATABASE_URI"
-        value = var.db_uri
+        value = locals.database_uri
       }
     }
   }

@@ -11,7 +11,7 @@ concurrency:
   group: build-order
 
 jobs:
-  build-notification:
+  build-order:
     runs-on: ubuntu-latest
 
     strategy:

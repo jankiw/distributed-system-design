@@ -29,25 +29,36 @@ resource "azurerm_subnet" "postgresql" {
     }
 }
 
-resource "azurerm_network_interface" "example" {
-    count = 3
-    name = "example-nic-${count.index}"
+/*
+resource "azurerm_public_ip" "order" {
+    name = "order-pip"
+    location = azurerm_resource_group.example.location
+    resource_group_name = azurerm_resource_group.example.name
+    allocation_method = "Static"
+    sku = "Standard"
+}
+
+resource "azurerm_network_interface" "order" {
+    name = "example-nic-order"
     location = azurerm_resource_group.example.location
     resource_group_name = azurerm_resource_group.example.name
     ip_configuration {
         name = "internal"
         subnet_id = azurerm_subnet.example.id 
         private_ip_address_allocation = "Dynamic"
-        #public_ip_address_id = azurerm_public_ip.vm[count.index].id
+        public_ip_address_id = azurerm_public_ip.order.id
     }
 }
-/*
-resource "azurerm_public_ip" "vm" {
-    count = 3
-    name = "vm-pip-${count.index}"
+
+
+resource "azurerm_network_interface" "consumer" {
+    name = "example-nic-consumer"
     location = azurerm_resource_group.example.location
     resource_group_name = azurerm_resource_group.example.name
-    allocation_method = "Static"
-    sku = "Standard"
+    ip_configuration {
+        name = "internal"
+        subnet_id = azurerm_subnet.example.id 
+        private_ip_address_allocation = "Dynamic"
+    }
 }
 */
