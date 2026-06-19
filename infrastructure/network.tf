@@ -59,6 +59,34 @@ resource "azurerm_subnet" "postgresql" {
     }
 }
 
+resource "azurerm_private_dns_zone" "example" {
+  name                = azurerm_container_app_environment.example.default_domain
+  resource_group_name = azurerm_resource_group.example.name
+}
+
+resource "azurerm_private_dns_zone_virtual_network_link" "example" {
+  name                  = "example-link"
+  resource_group_name   = azurerm_resource_group.example.name
+  private_dns_zone_name = azurerm_private_dns_zone.example.name
+  virtual_network_id    = azurerm_virtual_network.example.id
+}
+
+resource "azurerm_private_dns_a_record" "example-rood" {
+  name                = "@"
+  zone_name           = azurerm_private_dns_zone.example.name
+  resource_group_name = azurerm_resource_group.example.name
+  ttl                 = 300
+  records             = [azurerm_container_app_environment.example.static_ip_address]
+}
+
+resource "azurerm_private_dns_a_record" "example-wildcard" {
+  name                = "*"
+  zone_name           = azurerm_private_dns_zone.example.name
+  resource_group_name = azurerm_resource_group.example.name
+  ttl                 = 300
+  records             = [azurerm_container_app_environment.example.static_ip_address]
+}
+
 /*
 resource "azurerm_public_ip" "order" {
     name = "order-pip"
