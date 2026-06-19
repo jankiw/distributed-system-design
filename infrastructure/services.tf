@@ -17,6 +17,7 @@ resource "azurerm_linux_web_app" "web-app" {
   resource_group_name = azurerm_resource_group.example.name
   service_plan_id     = azurerm_service_plan.service_plan.id
   app_settings        = merge(local.app_settings, var.app_settings)
+  virtual_network_subnet_id = azurerm_subnet.appservice.id
 
   site_config {
     always_on        = true # always_on cannot be set to true when using Free, F1, D1 Sku

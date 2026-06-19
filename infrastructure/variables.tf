@@ -22,6 +22,10 @@ variable "endpoint_address_prefixes" {
     default = ["10.0.4.0/24"]
 }
 
+variable "appservice_address_prefixes" {
+    default = ["10.0.5.0/24"]
+}
+
 variable "streamlit_docker_image_name" {
   type        = string
   default     = "jankiw/distributed-system-design:streamlit"
