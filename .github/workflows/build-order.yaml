@@ -70,4 +70,4 @@ jobs:
 
       - name: Restart App Service (force pull new image)
         run: |
-          az webapp restart --name \${{ matrix.service }} --resource-group \example-rg
+          az webapp restart --name \${{ matrix.service }} --resource-group \example-rg-1

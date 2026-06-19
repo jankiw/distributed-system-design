@@ -59,4 +59,4 @@ jobs:
 
       - name: Restart App Service (force pull new image)
         run: |
-          az webapp restart --name \my-dsd-payments --resource-group \example-rg
+          az webapp restart --name \my-dsd-payments --resource-group \example-rg-1
