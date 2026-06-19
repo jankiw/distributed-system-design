@@ -17,7 +17,7 @@ resource "azurerm_postgresql_flexible_server" "postgresql" {
     resource_group_name = azurerm_resource_group.example.name
     administrator_login = "psqladmin"
     administrator_password = "P@sSw0rd243%"
-    sku_name = "GP_Standard_D2s_v3"
+    sku_name = "GP_Standard_D4s_v3"
     version = "13"
     storage_mb = 32768
     delegated_subnet_id = azurerm_subnet.postgresql.id
