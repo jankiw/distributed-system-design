@@ -160,6 +160,18 @@ resource "azurerm_container_app" "order" {
   resource_group_name          = azurerm_resource_group.example.name
   revision_mode                = "Single"
 
+  ingress {
+    allow_insecure_connections = true
+    external_enabled           = true
+    target_port                = 8080
+    transport                  = "http"
+
+    traffic_weight {
+      latest_revision = true
+      percentage      = 100
+    }
+  }
+
   template {
     container {
       name   = "examplecontainerapp"
