@@ -44,6 +44,7 @@ resource "azurerm_container_app_environment" "example" {
   resource_group_name        = azurerm_resource_group.example.name
   log_analytics_workspace_id = azurerm_log_analytics_workspace.example.id
   infrastructure_subnet_id = azurerm_subnet.example.id
+  internal_load_balancer_enabled = true
 }
 
 resource "azurerm_container_app" "notifications" {
@@ -87,7 +88,6 @@ resource "azurerm_container_app" "payments" {
   container_app_environment_id = azurerm_container_app_environment.example.id
   resource_group_name          = azurerm_resource_group.example.name
   revision_mode                = "Single"
-  internal_load_balancer_enabled = true
 
   template {
     container {
