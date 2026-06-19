@@ -75,7 +75,7 @@ resource "azurerm_container_app" "notifications" {
 
       env {
         name = "DATABASE_URI"
-        value = locals.database_uri
+        value = local.database_uri
       }
     }
   }
@@ -111,7 +111,7 @@ resource "azurerm_container_app" "payments" {
 
       env {
         name = "DATABASE_URI"
-        value = locals.database_uri
+        value = local.database_uri
       }
     }
   }
@@ -147,7 +147,7 @@ resource "azurerm_container_app" "consumer" {
 
       env {
         name = "DATABASE_URI"
-        value = locals.database_uri
+        value = local.database_uri
       }
     }
   }
@@ -183,7 +183,7 @@ resource "azurerm_container_app" "order" {
 
       env {
         name = "DATABASE_URI"
-        value = locals.database_uri
+        value = local.database_uri
       }
     }
   }
