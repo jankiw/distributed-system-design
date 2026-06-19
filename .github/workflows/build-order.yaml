@@ -1,0 +1,69 @@
+name: Build order
+
+on:
+  push:
+    branches: ['main']
+    paths:
+      - 'paymentService/**'
+  workflow_dispatch:
+
+concurrency:
+  group: build-payments
+
+jobs:
+  build-notification:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        dockerfile: [Dockerfile.order, Dockerfile.consumer]
+        tag: [order, consumer]
+        service: [my-dsd-order, my-dsd-consumer]
+
+    environment: production
+    env:
+      REGISTRY: ghcr.io
+
+    permissions:
+      contents: write
+      packages: write
+      id-token: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Azure login
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZURE_ENTRA_ID_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_ENTRA_ID_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Get owner/repo name and convert to lowercase
+        id: get-image-name
+        run: echo "image-name=$(echo ${{ github.repository }} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_OUTPUT
+
+      - uses: fregante/setup-git-user@v2
+
+      - name: Log in to the Container registry
+        uses: docker/login-action@v3.2.0
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5.3.0
+        with:
+          context: ./paymentService
+          file: ./paymentService/${{ matrix.dockerfile }}
+          push: true
+          tags: |
+            ${{ env.REGISTRY }}/${{ steps.get-image-name.outputs.image-name }}:${{ matrix.tag }}
+
+      - name: Restart App Service (force pull new image)
+        run: |
+          az webapp restart --name \${{ matrix.service }} --resource-group \example-rg

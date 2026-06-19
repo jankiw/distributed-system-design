@@ -16,4 +16,4 @@ EXPOSE 80
 
 USER appuser
 
-CMD ["python", "app.py"]
+CMD ["python", "consumer.py"]

@@ -23,9 +23,9 @@ variable "streamlit_docker_image_name" {
   default     = "jankiw/distributed-system-design:streamlit"
 }
 
-variable "notification_docker_image_name" {
+variable "order_docker_image_name" {
   type        = string
-  default     = "jankiw/distributed-system-design:notification"
+  default     = "jankiw/distributed-system-design:order"
 }
 
 variable "docker_registry_url" {

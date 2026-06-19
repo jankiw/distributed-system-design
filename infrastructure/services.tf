@@ -44,7 +44,7 @@ resource "azurerm_container_app_environment" "example" {
   log_analytics_workspace_id = azurerm_log_analytics_workspace.example.id
 }
 
-resource "azurerm_container_app" "example" {
+resource "azurerm_container_app" "notifications" {
   name                         = "my-dsd-notifications"
   container_app_environment_id = azurerm_container_app_environment.example.id
   resource_group_name          = azurerm_resource_group.example.name
@@ -54,6 +54,114 @@ resource "azurerm_container_app" "example" {
     container {
       name   = "examplecontainerapp"
       image  = "ghcr.io/jankiw/distributed-system-design:notification"
+      cpu    = 0.25
+      memory = "0.5Gi"
+
+      env {
+        name = "SERVICE_BUS_CONNECTION_STRING"
+        value = var.bus_string
+      }
+
+      env {
+        name = "ACS_CONNECTION_STRING"
+        value = var.acs_string
+      }
+
+      env {
+        name = "ACS_SENDER_ADDRESS"
+        value = var.acs_addr
+      }
+
+      env {
+        name = "DATABASE_URI"
+        value = var.db_uri
+      }
+    }
+  }
+}
+
+resource "azurerm_container_app" "payments" {
+  name                         = "my-dsd-payments"
+  container_app_environment_id = azurerm_container_app_environment.example.id
+  resource_group_name          = azurerm_resource_group.example.name
+  revision_mode                = "Single"
+
+  template {
+    container {
+      name   = "examplecontainerapp"
+      image  = "ghcr.io/jankiw/distributed-system-design:payment"
+      cpu    = 0.25
+      memory = "0.5Gi"
+
+      env {
+        name = "SERVICE_BUS_CONNECTION_STRING"
+        value = var.bus_string
+      }
+
+      env {
+        name = "ACS_CONNECTION_STRING"
+        value = var.acs_string
+      }
+
+      env {
+        name = "ACS_SENDER_ADDRESS"
+        value = var.acs_addr
+      }
+
+      env {
+        name = "DATABASE_URI"
+        value = var.db_uri
+      }
+    }
+  }
+}
+
+resource "azurerm_container_app" "consumer" {
+  name                         = "my-dsd-consumer"
+  container_app_environment_id = azurerm_container_app_environment.example.id
+  resource_group_name          = azurerm_resource_group.example.name
+  revision_mode                = "Single"
+
+  template {
+    container {
+      name   = "examplecontainerapp"
+      image  = "ghcr.io/jankiw/distributed-system-design:consumer"
+      cpu    = 0.25
+      memory = "0.5Gi"
+
+      env {
+        name = "SERVICE_BUS_CONNECTION_STRING"
+        value = var.bus_string
+      }
+
+      env {
+        name = "ACS_CONNECTION_STRING"
+        value = var.acs_string
+      }
+
+      env {
+        name = "ACS_SENDER_ADDRESS"
+        value = var.acs_addr
+      }
+
+      env {
+        name = "DATABASE_URI"
+        value = var.db_uri
+      }
+    }
+  }
+}
+
+resource "azurerm_container_app" "corder" {
+  name                         = "my-dsd-order"
+  container_app_environment_id = azurerm_container_app_environment.example.id
+  resource_group_name          = azurerm_resource_group.example.name
+  revision_mode                = "Single"
+
+  template {
+    container {
+      name   = "examplecontainerapp"
+      image  = "ghcr.io/jankiw/distributed-system-design:order"
       cpu    = 0.25
       memory = "0.5Gi"
 

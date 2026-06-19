@@ -1,4 +1,4 @@
-/*
+
 resource "azurerm_virtual_network" "example" {
     name = "example-network"
     address_space = var.vnet_address_space
@@ -20,13 +20,13 @@ resource "azurerm_subnet" "postgresql" {
     address_prefixes = var.postgresql_address_prefixes
 
     delegation {
-    name = "postgresql-delegation"
+        name = "postgresql-delegation"
 
-    service_delegation {
-      name    = "Microsoft.DBforPostgreSQL/flexibleServers"
-      actions = ["Microsoft.Network/virtualNetworks/subnets/join/action"]
+        service_delegation {
+            name    = "Microsoft.DBforPostgreSQL/flexibleServers"
+            actions = ["Microsoft.Network/virtualNetworks/subnets/join/action"]
+        }
     }
-  }
 }
 
 resource "azurerm_network_interface" "example" {
@@ -41,7 +41,6 @@ resource "azurerm_network_interface" "example" {
         #public_ip_address_id = azurerm_public_ip.vm[count.index].id
     }
 }
-*/
 /*
 resource "azurerm_public_ip" "vm" {
     count = 3
