@@ -16,12 +16,13 @@ jobs:
 
     strategy:
       matrix:
-      - dockerfile: Dockerfile.order
-        tag: order
-        service: my-dsd-order
-      - dockerfile: Dockerfile.consumer
-        tag: consumer
-        service: my-dsd-consumer
+        include:
+        - dockerfile: Dockerfile.order
+          tag: order
+          service: my-dsd-order
+        - dockerfile: Dockerfile.consumer
+          tag: consumer
+          service: my-dsd-consumer
 
     environment: production
     env:
