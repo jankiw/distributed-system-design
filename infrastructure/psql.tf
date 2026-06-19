@@ -20,7 +20,7 @@ resource "azurerm_postgresql_flexible_server" "postgresql" {
     sku_name = "GP_Standard_D4s_v3"
     version = "13"
     storage_mb = 32768
-    #delegated_subnet_id = azurerm_subnet.postgresql.id
+    delegated_subnet_id = azurerm_subnet.postgresql.id
     public_network_access_enabled = false
     private_dns_zone_id = azurerm_private_dns_zone.postgresql.id
     zone = "1"
@@ -33,6 +33,7 @@ resource "azurerm_postgresql_flexible_server_database" "exampledb" {
     collation = "en_US.utf8"
 }
 
+/*
 resource "azurerm_postgresql_flexible_server_virtual_endpoint" "example" {
   name                = "example-dsd-endpoint"
   location            = azurerm_resource_group.example.location
@@ -46,6 +47,7 @@ resource "azurerm_postgresql_flexible_server_virtual_endpoint" "example" {
     subresource_names              = ["postgresqlServer"]
   }
 }
+*/
 
 /*
 resource "azurerm_postgresql_firewall_rule" "allow_vm" {
