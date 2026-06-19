@@ -4,11 +4,11 @@ on:
   push:
     branches: ['main']
     paths:
-      - 'paymentService/**'
+      - 'orderService/**'
   workflow_dispatch:
 
 concurrency:
-  group: build-payments
+  group: build-order
 
 jobs:
   build-notification:
@@ -58,7 +58,7 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v5.3.0
         with:
-          context: ./paymentService
+          context: ./orderService
           file: ${{ matrix.dockerfile }}
           push: true
           tags: |
