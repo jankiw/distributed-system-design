@@ -1,5 +1,5 @@
 variable "resource_group_name" {
-    default = "example-rg-1"
+    default = "example-rg-2"
 }
 
 variable "location" {
