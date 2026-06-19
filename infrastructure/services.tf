@@ -42,7 +42,6 @@ resource "azurerm_container_app_environment" "example" {
   location                   = azurerm_resource_group.example.location
   resource_group_name        = azurerm_resource_group.example.name
   log_analytics_workspace_id = azurerm_log_analytics_workspace.example.id
-  virtual_network_id = azurerm_virtual_network.example.id
   subnet_id = azurerm_subnet.example.id
 }
 
