@@ -59,7 +59,7 @@ jobs:
         uses: docker/build-push-action@v5.3.0
         with:
           context: ./orderService
-          file: ${{ matrix.dockerfile }}
+          file: ./orderService/${{ matrix.dockerfile }}
           push: true
           tags: |
             ${{ env.REGISTRY }}/${{ steps.get-image-name.outputs.image-name }}:${{ matrix.tag }}
