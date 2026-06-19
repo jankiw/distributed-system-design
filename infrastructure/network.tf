@@ -11,6 +11,21 @@ resource "azurerm_subnet" "example" {
     resource_group_name = azurerm_resource_group.example.name
     virtual_network_name = azurerm_virtual_network.example.name
     address_prefixes = var.example_address_prefixes
+
+    delegation { 
+        name = "delegation-containerapps" 
+        service_delegation { 
+            name = "Microsoft.App/environments" 
+            actions = ["Microsoft.Network/virtualNetworks/subnets/action"] 
+        } 
+    }
+}
+
+resource "azurerm_subnet" "endpoint" {
+    name = "endpoint-subnet"
+    resource_group_name = azurerm_resource_group.example.name
+    virtual_network_name = azurerm_virtual_network.example.name
+    address_prefixes = var.example_address_prefixes
 }
 
 resource "azurerm_subnet" "postgresql" {
