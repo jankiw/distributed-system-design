@@ -18,6 +18,10 @@ variable "postgresql_address_prefixes" {
     default = ["10.0.3.0/24"]
 }
 
+variable "endpoint_address_prefixes" {
+    default = ["10.0.2.0/24"]
+}
+
 variable "streamlit_docker_image_name" {
   type        = string
   default     = "jankiw/distributed-system-design:streamlit"
