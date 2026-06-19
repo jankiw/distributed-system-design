@@ -189,7 +189,7 @@ resource "azurerm_container_app" "order" {
     }
   }
 }
-
+/*
 resource "azurerm_private_endpoint" "example" {
   name                = "example-dsd-endpoint"
   location            = azurerm_resource_group.example.location
@@ -202,3 +202,4 @@ resource "azurerm_private_endpoint" "example" {
     is_manual_connection           = false
   }
 }
+*/
