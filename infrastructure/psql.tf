@@ -33,7 +33,8 @@ resource "azurerm_postgresql_flexible_server_database" "exampledb" {
     collation = "en_US.utf8"
 }
 
-resource "azurerm_private_endpoint" "example" {
+/*
+resource "azurerm_postgresql_flexible_server_virtual_endpoint" "example" {
   name                = "example-dsd-endpoint"
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
@@ -46,6 +47,7 @@ resource "azurerm_private_endpoint" "example" {
     subresource_names              = ["postgresqlServer"]
   }
 }
+*/
 
 /*
 resource "azurerm_postgresql_firewall_rule" "allow_vm" {
