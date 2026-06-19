@@ -9,4 +9,4 @@ resource "azurerm_servicebus_namespace" "example" {
     source = "terraform"
   }
 }
-*
+*/
