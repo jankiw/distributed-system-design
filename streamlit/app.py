@@ -15,8 +15,8 @@ if st.button("Post item"):
     endpoint = f"{ORDER_API_URL.rstrip('/products')}/"
     body = {
         'name': 'testProduct',
-        'amount': 32,
-        'price': 137
+        'amount': '32',
+        'price': '137'
     }
     try:
         response = requests.post(endpoint, json = body, timeout=10)
