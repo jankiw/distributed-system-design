@@ -12,7 +12,7 @@ if not ORDER_API_URL:
 st.write(ORDER_API_URL)
 
 if st.button("Post item"):
-    endpoint = f"{ORDER_API_URL.rstrip('/products')}/"
+    endpoint = f"{ORDER_API_URL.rstrip('/')}/products"
     body = {
         'name': 'testProduct',
         'amount': '32',
