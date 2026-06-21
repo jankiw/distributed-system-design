@@ -28,7 +28,7 @@ if post:
     try:
         response = requests.post(endpoint, json = body, timeout=10)
 
-        if response.status_code == 200:
+        if response.status_code == 2001:
             data = response.json()
             st.success("Product created!")
 
@@ -45,14 +45,18 @@ if post:
 
 with st.form("form2"):
     id = st.text_input("Product ID")
+    email = st.text_input("Email")
     order = st.form_submit_button("Order item")
 
 if order:
     endpoint = f"{ORDER_API_URL.rstrip('/')}/{id}"
+    body = {
+        'email': email
+    }
     try:
         response = requests.post(endpoint, json = body, timeout=10)
 
-        if response.status_code == 200:
+        if response.status_code == 201:
             data = response.json()
             st.success("Product ordered!")
 
